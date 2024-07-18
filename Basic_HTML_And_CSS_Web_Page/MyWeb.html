@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Webpage</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="Todo.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome To My TO DO List Website</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <h1 style="text-align: center;">Home</h1>
+            <h2>Task List</h2><br>
+            <form id="taskForm">
+                <input type="text" id="taskInput" placeholder="Enter Task Here...">
+                <button type="submit" id="addTask">Add Task</button>
+            </form>
+            <h2>Tasks</h2>
+            <div id="tasks"></div>
+            <script>
+                
+                function addTask(taskContent) {
+                    var taskList = document.getElementById("tasks");
+
+                    var taskContainer = document.createElement("div");
+                    taskContainer.classList.add("task-container");
+
+                    var inputField = document.createElement("input");
+                    inputField.type = "text";
+                    inputField.classList.add("text");
+                    inputField.value = taskContent;
+                    inputField.readOnly = true;
+
+                    var editButton = document.createElement("button");
+                    editButton.textContent = "Edit";
+                    editButton.classList.add("edit");
+                    editButton.addEventListener("click", function() {
+                        inputField.readOnly = false;
+                        saveButton.style.display = "inline"; 
+                    });
+
+                    var deleteButton = document.createElement("button");
+                    deleteButton.textContent = "Delete";
+                    deleteButton.classList.add("delete");
+                    deleteButton.addEventListener("click", function() {
+                        taskContainer.remove();
+                    });
+
+                    var saveButton = document.createElement("button");
+                    saveButton.textContent = "Save Changes";
+                    saveButton.classList.add("save");
+                    saveButton.style.display = "none"; 
+                    saveButton.addEventListener("click", function() {
+                        inputField.readOnly = true;
+                        saveButton.style.display = "none"; 
+                    });
+
+                    taskContainer.appendChild(inputField);
+
+                    var actionsDiv = document.createElement("div");
+                    actionsDiv.classList.add("actions");
+                    actionsDiv.appendChild(editButton);
+                    actionsDiv.appendChild(deleteButton);
+                    actionsDiv.appendChild(saveButton);
+                    taskContainer.appendChild(actionsDiv);
+
+                    taskList.appendChild(taskContainer);
+                }
+
+                document.getElementById("taskForm").addEventListener("submit", function(event) {
+                    event.preventDefault(); 
+                    var taskInput = document.getElementById("taskInput");
+                    var taskContent = taskInput.value.trim();
+                    if (taskContent !== "") {
+                        addTask(taskContent);
+                        taskInput.value = ""; 
+                    }
+                });
+
+             
+                function scrollToTaskInput() {
+                    document.getElementById("taskInput").focus();
+                }
+                
+                function toggleAnswer(event) {
+                var answer = event.target.nextElementSibling;
+                if (answer.style.display === "block") {
+                    answer.style.display = "none";
+                } else {
+                    answer.style.display = "block";
+                }
+                }
+                document.getElementById("contactForm").addEventListener("submit", function(event) {
+                var error = document.getElementById("error");
+                var name = document.getElementById("name").value.trim();
+                var email = document.getElementById("email").value.trim();
+                var message = document.getElementById("message").value.trim();
+
+                if (name === "" || email === "" || message === "") {
+                    event.preventDefault();
+                    error.textContent = "All fields must be filled out.";
+                } else {
+                    error.textContent = "";
+                }
+            });
+            </script>
+        </section>
+
+        <section id="about">
+            <h1 style="text-align: center;">About Us</h1>
+            <p style="color: burlywood;">Hi, I'm Kiran Talreja, a front-end intern here. I've created a To-Do List to help you manage and organize your feedback collection tasks.</p>
+            <ul>
+                <li>Hello! I'm Kiran Talreja, and I'm excited to share my latest project with you.</li>
+                <li>As a front-end intern, I designed a To-Do List tailored for feedback collection.</li>
+                <li>This tool allows you to easily add, organize, and prioritize your tasks.</li>
+                <li>You can edit and update tasks as needed, ensuring everything stays current.</li>
+                <li>My goal was to create a seamless experience for managing feedback efficiently.</li>
+            </ul>
+            <button onclick="scrollToTaskInput()">Let's Add Task</button>
+        </section>
+
+        <section id="contact">
+            <h1 style="text-align: center;">Contact</h1>
+            <form id="contactForm">
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name" required><br><br>
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" required><br><br>
+                <label for="message">Message:</label><br>
+                <textarea id="message" name="message" rows="4" required></textarea><br><br>
+                <button type="submit">Send</button>
+                <div class="error" id="error"></div>
+            </form>
+            <h2>Contact Information</h2>
+            <p>Email: <a href="mailto:Kiran.Support@feedback.com">Kiran.Support@feedback.com</a><br /></p>
+            <p>Phone: <a href="tel:+92336688760">(+92) 336-688760</a></p>
+            <h2>FAQ</h2>
+            <div class="faq">
+                <div class="faq-item">
+                    <p class="faq-question" onclick="toggleAnswer(event)" style="cursor: pointer;">How do I add a task?</p>
+                    <p class="faq-answer" style="display: none;">To add a task, go to the Home section and enter your task in the input field, then click the 'Add Task' button.</p>
+                </div>
+                <div class="faq-item">
+                    <p class="faq-question" onclick="toggleAnswer(event)" style="cursor: pointer;">Can I edit a task once it's added?</p>
+                    <p class="faq-answer" style="display: none;">Yes, click the 'Edit' button next to the task, make your changes, and then click 'Save Changes'.</p>
+                </div>
+                <div class="faq-item">
+                    <p class="faq-question" onclick="toggleAnswer(event)" style="cursor: pointer;">How do I delete a task?</p>
+                    <p class="faq-answer" style="display: none;">Click the 'Delete' button next to the task you wish to remove.</p>
+                </div>
+                <div class="faq-item">
+                    <p class="faq-question" onclick="toggleAnswer(event)" style="cursor: pointer;">How can I contact support?</p>
+                    <p class="faq-answer" style="display: none;">You can contact support by filling out the form above or by emailing <a href="mailto:Kiran.Support@feedback.com">Kiran.Support@feedback.com</a>.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="share">
+            <a href="https://www.facebook.com/login.php" class="fab fa-facebook-f"></a>
+            <a href="https://twitter.com/i/flow/login" class="fab fa-twitter"></a>
+            <a href="https://www.instagram.com/accounts/login/?hl=en" class="fab fa-instagram"></a>
+            <a href="https://www.linkedin.com/login" class="fab fa-linkedin"></a>
+            <a href="https://www.pinterest.ph/login/" class="fab fa-pinterest"></a>
+        </div>
+
+        <p>created by <span>Kiran Talreja</span> &copy; 2024 Your Company. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+

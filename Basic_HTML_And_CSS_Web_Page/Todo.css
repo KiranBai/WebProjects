@@ -1,0 +1,61 @@
+body{
+    background-color: rgb(66, 60, 66);
+}
+
+  
+
+#taskInput {
+    width: 300px;
+    height: 20px;
+    border-radius: 5px;
+    font-size: 15px;
+    background-color: rgb(231, 202, 202);
+
+}
+input,button {
+    appearance: none;
+    border: none;
+    outline: none;
+    background: none ;
+}
+#addTask{
+    color:fuchsia ;
+}
+h2{
+    color: blanchedalmond;   
+}
+#tasks{
+    width: 380px;
+    display: block;
+    border-radius: 5px;
+    justify-content: space-between;
+    background-color: rgb(27, 27, 27);
+    padding: 0px;
+    font-size: 20px;
+    margin-bottom: 10px; /* Adds space between tasks */
+    
+} 
+.text{
+    color: blanchedalmond;
+}
+.task-container {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.task-container input {
+    margin-bottom: 5px;
+    flex: 1;
+    margin-right: 10px;
+}
+.actions {
+    display: flex;
+    align-items: center;
+}
+.actions button {
+    margin-left: 5px;
+    color:fuchsia ;
+}
